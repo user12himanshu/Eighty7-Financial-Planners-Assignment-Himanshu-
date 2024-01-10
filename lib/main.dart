@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:untitled/constants/constants.dart';
 import 'package:untitled/screens/home_screen.dart';
@@ -6,7 +7,8 @@ import 'package:untitled/services/api_service.dart';
 import 'package:untitled/services/route_service.dart';
 import 'package:untitled/utils/theme_util.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
@@ -24,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     Api api = Api();
-    api.apiKey = AppConstants.apiKey;
+    api.apiKey = dotenv.env['API_KEY'];
     super.initState();
   }
 
